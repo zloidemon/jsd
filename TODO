@@ -1,0 +1,4 @@
+* improving looger
+* threading to db connectios
+* migrate to cmake
+* add support options suppoted db
