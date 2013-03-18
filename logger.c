@@ -10,6 +10,9 @@
 void
 jsd_logger(jsd_log_t level, const char *fmt, ...)
 { 
+  /**
+   * Fix me, buffer overload
+   */
 
   char msg[1024];
 

@@ -14,7 +14,6 @@ stat_printer(memcached_server_instance_st instance,
                                        void *context)
 {
   static memcached_server_instance_st last= NULL;
-  (void)context;
   
   if (last != instance)
   {

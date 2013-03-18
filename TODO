@@ -1,4 +1,4 @@
-* improving looger
+* improving logger
 * threading to db connectios
 * migrate to cmake
-* add support options suppoted db
+* add support options for suppoted db
