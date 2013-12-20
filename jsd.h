@@ -46,7 +46,7 @@ void jsd_logger(jsd_log_t, const char *, ...);
  * @brief Default configuration struct
  */
 typedef struct {
-	int  port;      /**< port of service */
+	int   port;     /**< port of service */
   char *handler;  /**< It's handler for http module and script for servers */
 	char *host;     /**< IP address of server */
   char *database; /**< Need only for MySQL */
@@ -75,6 +75,9 @@ int jsd_http_server(jsd_conf *);
 #include "lualib.h"
 #include "lauxlib.h"
 
+/**
+ * include cjson-lua
+ */
 #include <cjson/fpconv.h>
 #include <cjson/strbuf.h>
 

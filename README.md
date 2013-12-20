@@ -16,8 +16,9 @@ Depended by:
 * lua-cjson
 
 Example outputs:
-<pre>
+
 memcached:
+<pre>
 {
     "connections": 3198,
     "queries": 0,
@@ -63,9 +64,10 @@ memcached:
         "avg_query_wall": 0
     }
 }
+</pre>
 
 redis:
-
+<pre>
 {
     "server": {
         "lru_clock": 44453,

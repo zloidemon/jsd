@@ -20,7 +20,7 @@ static void jsd_handler_request_cb(struct evhttp_request *, void *);
  * @brief struct for request params
  */
 struct jsd_serv_name {
-    int        num;     /**< Number of server in emum */
+    int         num;    /**< Number of server in emum */
     const char *name;   /**< Type of server */
     void (*init) (void **, jsd_conf *);
     int  (*info) (void **, const char *, char **);
@@ -94,7 +94,7 @@ jsd_handler_request_cb(struct evhttp_request *req, void *cfg)
   }
 
   if (param != NULL) {
-    evhttp_clear_headers(&uri);
+     evhttp_clear_headers(&uri);
   }
   evbuffer_free(evb);
 }
