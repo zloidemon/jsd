@@ -25,10 +25,16 @@ struct jsd_serv_name {
     void (*init) (void **, jsd_conf *);
     int  (*info) (void **, const char *, char **);
 } commands[] = {
+#if ENABLE_MEMCACHED
   { JSD_MEMC,   "memcached", memc_conn,  jsd_memc_info },
+#endif
+#if ENABLE_MYSQL
   { JSD_MYSQL,  "mysql",     mysql_conn, jsd_mysql_info },
-  { JSD_REDIS,  "redis",     redis_conn, jsd_redis_info },
-  { JSD_SPHINX, "sphinx",    mysql_conn, jsd_mysql_info }
+  { JSD_SPHINX, "sphinx",    mysql_conn, jsd_mysql_info },
+#endif
+#if ENABLE_REDIS
+  { JSD_REDIS,  "redis",     redis_conn, jsd_redis_info }
+#endif
 };
 
 

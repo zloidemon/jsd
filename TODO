@@ -1,4 +1,2 @@
 * improving logger
-* threading to db connectios
-* migrate to cmake
-* add support options for suppoted db
+* threading to db connections

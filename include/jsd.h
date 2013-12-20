@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * @brief Supported server
@@ -54,7 +55,8 @@ typedef struct {
   char *user;     /**< Username for auth */
 } jsd_conf;
 
-#ifdef WITH_HTTP
+#include <config.h>
+
 #include <signal.h>
 
 #include <event2/event.h>
@@ -68,18 +70,11 @@ typedef struct {
  * @return 0 on success, -1 on failure
  */
 int jsd_http_server(jsd_conf *);
-#endif
 
-#ifdef WITH_LUA
 #include "lua.h"
 #include "lualib.h"
 #include "lauxlib.h"
 
-/**
- * include cjson-lua
- */
-#include <cjson/fpconv.h>
-#include <cjson/strbuf.h>
 
 /**
  * Create a new LUA machine and run file
@@ -126,26 +121,4 @@ void jsd_parse_lua(lua_State *, const char *, const char *);
  * exit on failure.
  */
 char      *jsd_stat_lua(lua_State *);
-#endif
-
-#ifdef WITH_MYSQL
-#include <mysql.h>
-typedef MYSQL jsd_mysql;
-void    mysql_conn(void **, jsd_conf *);
-int     jsd_mysql_info(void **, const char *, char **);
-#endif
-
-#ifdef WITH_MEMC
-#include <libmemcached/memcached.h>
-typedef memcached_st jsd_memc;
-void    memc_conn(void **, jsd_conf *);
-int     jsd_memc_info(void **, const char *, char **);
-#endif
-
-#ifdef WITH_RED
-#include <hiredis.h>
-typedef   redisContext jsd_redis;
-void      redis_conn(void **, jsd_conf *);
-int       jsd_redis_info(void **, const char *, char **);
-#endif
 
