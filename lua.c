@@ -35,6 +35,15 @@ static void *config_lua_alloc(lua_State *, const int);
  */
 static void config_std_get(lua_State *, jsd_conf *, char *);
 
+/**
+ * Get external volues from lua
+ * 
+ * @param LUA pointer to lua stack
+ * @param cfg pointer to jsd_conf where need save param
+ */
+static void config_mysql_get(lua_State *, jsd_conf *);
+static void config_server_get(lua_State *, jsd_conf *);
+
 void
 jsd_parse_lua(lua_State *LUA, const char *string, const char *number)
 {
@@ -95,6 +104,25 @@ config_std_get(lua_State *LUA, jsd_conf *cfg, char *server)
    config_lua_get(LUA, "handler", (void*)&(cfg->handler));
 }
 
+static void
+config_server_get(lua_State *LUA, jsd_conf *cfg)
+{
+   daemond *daemon = ((jsd_server_conf *)(cfg->xattr))->d;
+   if (!daemon->pid.pidfile) {
+       config_lua_get(LUA, "pid", (void*)&(daemon->pid.pidfile));
+   }
+   config_lua_get(LUA, "name", (void*)&(daemon->name));
+}
+
+static void
+config_mysql_get(lua_State *LUA, jsd_conf *cfg)
+{
+
+   config_lua_get(LUA, "user",     (void*)&(((jsd_db_conf *)(cfg->xattr))->user));
+   config_lua_get(LUA, "password", (void*)&(((jsd_db_conf *)(cfg->xattr))->password));
+   config_lua_get(LUA, "database", (void*)&(((jsd_db_conf *)(cfg->xattr))->database));
+}
+
 void
 jsd_config_lua(lua_State *LUA, jsd_conf *r_cfg, jsd_serv_t type)
 {
@@ -105,6 +133,7 @@ jsd_config_lua(lua_State *LUA, jsd_conf *r_cfg, jsd_serv_t type)
   switch(type) {
     case JSD_MYSQL: {
       config_std_get(LUA, cfg, "mysql");
+      config_mysql_get(LUA, cfg);
       break;
     }
     case JSD_REDIS: {
@@ -122,6 +151,7 @@ jsd_config_lua(lua_State *LUA, jsd_conf *r_cfg, jsd_serv_t type)
     case JSD_SERVER:
     default: {
       config_std_get(LUA, cfg, "server");
+      config_server_get(LUA, cfg);
       break;
     }
   }
@@ -130,7 +160,7 @@ jsd_config_lua(lua_State *LUA, jsd_conf *r_cfg, jsd_serv_t type)
 static void *
 config_lua_alloc(lua_State *LUA, const int idx) {
   size_t len  = lua_objlen(LUA, idx);
-  void   *ptr = malloc(len);
+  void   *ptr = malloc(len+1);
   return ptr;
 }
 

@@ -1,3 +1,6 @@
 [submodule "cjson"]
 	path = cjson
 	url = https://github.com/mpx/lua-cjson.git
+[submodule "libdaemond"]
+	path = libdaemond
+	url = https://github.com/dyomas/libdaemond.git

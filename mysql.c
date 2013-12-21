@@ -15,8 +15,11 @@ mysql_conn(void **ret, jsd_conf *cfg)
 
   jsd_mysql *conn = mysql_init(NULL);
 
-  if (mysql_real_connect(conn, cfg->host, cfg->user, cfg->password,
-    cfg->database, cfg->port, NULL, 0) == NULL) {
+  if (mysql_real_connect(conn, cfg->host,
+      ((jsd_db_conf *)(cfg->xattr))->user,
+      ((jsd_db_conf *)(cfg->xattr))->password,
+      ((jsd_db_conf *)(cfg->xattr))->database,
+    cfg->port, NULL, 0) == NULL) {
 
     jsd_logger(JSD_ERR, mysql_error(conn));
     mysql_close(conn);

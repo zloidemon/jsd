@@ -1,7 +1,7 @@
 --[[
 -- @file memcached.lua
 --
--- @brief Sphinx stats paarser 
+-- @brief Memacached stats paarser 
 --
 ]]--
 

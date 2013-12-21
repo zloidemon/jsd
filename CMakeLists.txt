@@ -13,6 +13,7 @@ set (common_sources
 	${PROJECT_SOURCE_DIR}/cjson/fpconv.c
 	${PROJECT_SOURCE_DIR}/cjson/lua_cjson.c
 	${PROJECT_SOURCE_DIR}/cjson/strbuf.c
+	${PROJECT_SOURCE_DIR}/libdaemond/src/libdaemond.c
 )
 
 macro (install_lua lua)
@@ -67,6 +68,7 @@ endif (LUAJIT_LIB)
 
 include_directories (${PROJECT_SOURCE_DIR}/include)
 include_directories (${PROJECT_SOURCE_DIR}/cjson)
+include_directories (${PROJECT_SOURCE_DIR}/libdaemond/src)
 include_directories (${PROJECT_BINARY_DIR}/include)
 
 if (ENABLE_REDIS)

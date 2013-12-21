@@ -9,6 +9,8 @@ function config(server)
     port     = 3333
     host     = "127.0.0.1"
     handler  = "/admin.jsp"
+    pid      = "/var/run/jsd.pid"
+    name     = "jsd"
   elseif server == "redis" then
     host     = "127.0.0.1"
     port     = 6379
@@ -25,11 +27,11 @@ function config(server)
     user     = "admin"
     handler  = "lua/mysql.lua"
   elseif server == "sphinx" then
-    port = 9306
-    host = "127.0.0.1"
-    handler = "lua/sphinx.lua"
+    port     = 9306
+    host     = "127.0.0.1"
+    handler  = "lua/sphinx.lua"
   else
-    port = 3333
-    host = "127.0.0.1"
+    port     = 3333
+    host     = "127.0.0.1"
   end
 end

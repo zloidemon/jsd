@@ -10,6 +10,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <libdaemond.h>
+
+extern daemond d; /**< Structure which uses at logger and main */
 
 /**
  * @brief Supported server
@@ -47,18 +50,28 @@ void jsd_logger(jsd_log_t, const char *, ...);
  * @brief Default configuration struct
  */
 typedef struct {
-	int   port;     /**< port of service */
+  int   port;     /**< port of service */
   char *handler;  /**< It's handler for http module and script for servers */
-	char *host;     /**< IP address of server */
+  char *host;     /**< IP address of server */
+  void *xattr;
+} jsd_conf;
+
+/**
+ * @brief Structure with information about databases connection
+ */
+typedef struct {
   char *database; /**< Need only for MySQL */
   char *password; /**< Password for auth */
   char *user;     /**< Username for auth */
-} jsd_conf;
+} jsd_db_conf;
+
+typedef struct {
+  daemond *d;
+} jsd_server_conf;
 
 #include <config.h>
 
 #include <signal.h>
-
 #include <event2/event.h>
 #include <event2/http.h>
 #include <event2/buffer.h>

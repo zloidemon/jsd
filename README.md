@@ -9,11 +9,16 @@ Goals of project:
 * support lua scripts
 
 Depended by:
+* libdaemond
 * libmysqlclient
 * hiredis
 * libmemcached
 * libevent2
 * lua-cjson
+
+How to run:
+
+./jsd -C start -c lua/config.lua
 
 Example outputs:
 

@@ -1,2 +1,3 @@
-* improving logger
 * threading to db connections
+* Fix sphinx
+* Fix parser memcached.lua
